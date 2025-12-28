@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shyam Books - IGNOU Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --primary: #3bb19b; /* Teal */
+            --primary-dark: #2a8a78;
+            --bg-color: #E1E1E1; 
+            --text-dark: #333;
+            --text-light: #666;
+            --white: #ffffff;
+            --footer-bg: #2c3e50;
+            
+            /* New Variables for the split section */
+            --split-left: #4f4f51;
+            --split-right: #f2c4ce;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- NAVIGATION BAR --- */
+        nav {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 0 5%;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* HAMBURGER MENU (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        /* --- MAIN HERO SECTION --- */
+        .hero-section {
+            display: flex;
+            min-height: 90vh; 
+            padding-top: 100px; 
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 50px;
+        }
+
+        /* LEFT SIDE: CONTENT */
+        .content-side {
+            flex: 1;
+            padding: 40px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .motto-badge {
+            background-color: var(--white);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            width: fit-content;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: #555; 
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* --- PRODUCT GRID --- */
+        .book-showcase {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            max-width: 600px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: left;
+            transition: transform 0.3s, border-color 0.3s;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .product-icon {
+            font-size: 1.8rem;
+            color: var(--primary);
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .product-info h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .product-price {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .price-highlight {
+            color: var(--primary-dark);
+            font-weight: 800;
+            background-color: #e0f2f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* --- NEW: COURSES SELECTION SECTION (UPDATED BG) --- */
+        .courses-section {
+            /* The 50/50 Split Background */
+            background: linear-gradient(to right, #4f4f51 50%, #f2c4ce 50%);
+            
+            padding: 80px 5%;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+
+        .courses-section h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            /* Text shadow to ensure readability on the light pink side */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .courses-section p {
+            font-size: 1rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            font-weight: 500;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .select-wrapper {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Custom Dropdown Styling */
+        .custom-select {
+            width: 100%;
+            padding: 20px 30px;
+            font-size: 1.1rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--text-dark);
+            border: none;
+            border-radius: 50px;
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            background-color: #fff;
+            /* Updated arrow color to match the dark grey */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%234f4f51%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 25px top 50%;
+            background-size: 15px auto;
+        }
+
+        .custom-select:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.4);
+        }
+
+        /* RIGHT SIDE: LOGIN PORTAL */
+        .portal-side {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* --- THE LOGIN/SIGNUP COMPONENT --- */
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.15), 0 10px 10px rgba(0,0,0,0.12);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #ffffff;
+            padding: 0 40px;
+            width: 50%;
+        }
+
+        .sign-up-container {
+            left: 0;
+            opacity: 0;
+            z-index: 1;
+            transform: translateX(20%); 
+        }
+
+        .sign-in-container {
+            left: 0;
+            z-index: 2;
+        }
+
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+            0%, 49.99% { opacity: 0; z-index: 1; }
+            50%, 100% { opacity: 1; z-index: 5; }
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .overlay {
+            background: var(--primary);
+            background: linear-gradient(to right, #41c7af, #3bb19b);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+            color: #FFFFFF;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-left { transform: translateX(-20%); }
+        .container.right-panel-active .overlay-left { transform: translateX(0); }
+        .overlay-right { right: 0; transform: translateX(0); }
+        .container.right-panel-active .overlay-right { transform: translateX(20%); }
+
+        .form-container h1 { font-weight: 700; margin: 0 0 10px; font-size: 1.5rem;}
+        .title-teal { color: var(--primary); }
+        
+        .overlay-panel h1 { font-size: 1.8rem; margin-bottom: 10px; }
+        .overlay-panel p { font-size: 0.9rem; margin: 20px 0 30px; font-weight: 300; }
+
+        .social-container { margin: 10px 0; }
+        .social-container a {
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 35px;
+            width: 35px;
+            color: #333;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-container a:hover { border-color: var(--primary); color: var(--primary); }
+        
+        .form-container span { font-size: 11px; color: #888; margin-bottom: 10px; }
+
+        .input-group {
+            background-color: #f4f8f7;
+            border-radius: 4px;
+            padding: 8px 15px;
+            margin: 8px 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        .input-group i { color: #aaa; margin-right: 10px; font-size: 0.9rem; }
+        .input-group input { background: transparent; border: none; outline: none; width: 100%; font-size: 0.9rem;}
+
+        button.btn-form {
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            background-color: var(--primary);
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 10px 40px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        button.btn-form:active { transform: scale(0.95); }
+        button.ghost { background-color: transparent; border-color: #FFFFFF; }
+
+        /* --- FOOTER SECTION --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: #ecf0f1;
+            padding: 40px 5%;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-col p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #bdc3c7;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            color: #ecf0f1;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: 0.3s;
+        }
+
+        .contact-link i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .contact-link:hover i {
+            color: #fff;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 900px) {
+            .hamburger { display: block; }
+            
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: center;
+                gap: 0;
+                overflow: hidden;
+                height: 0;
+                transition: height 0.3s ease-in-out;
+                box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                height: 300px; 
+                padding: 20px 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 15px 0;
+            }
+
+            .hero-section { flex-direction: column; height: auto; padding-bottom: 20px; }
+            .content-side { text-align: center; align-items: center; }
+            .book-showcase { grid-template-columns: 1fr; width: 100%; }
+            .portal-side { padding: 20px; margin-bottom: 40px;}
+            
+            .footer-content { flex-direction: column; text-align: center; }
+            .contact-link { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-logo">
+            <i class="fa-solid fa-book-open"></i> Shyam Books
+        </div>
+        
+        <div class="hamburger">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#courses-section">Courses</a></li>
+            <li><a href="#">Assignments</a></li>
+            <li><a href="#">Solved Papers</a></li>
+            <li><a href="#contact-section">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero-section">
+        <div class="content-side">
+            <div class="motto-badge">Your Success, Our Priority</div>
+            
+            <h1 class="hero-title">Master Your <br><span>IGNOU Studies</span></h1>
+            
+            <p class="hero-desc">
+                Welcome to Shyam Books. Get high-quality solved assignments, project synopses, and handwritten copies tailored for IGNOU students.
+            </p>
+
+            <div style="width: 100%;">
+                <h3 style="margin-bottom: 15px; font-size: 1rem; color: #333;">Our Packages:</h3>
+                <div class="book-showcase">
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fa-regular fa-file-pdf"></i></div>
+                        <div class="product-info">
+                            <h4>Assignments (Soft)</h4>
+                            <div class="product-price">Only <span class="price-highlight">₹15</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fa-solid fa-briefcase"></i></div>
+                        <div class="product-info">
+                            <h4>Project Synopsis</h4>
+                            <div class="product-price"><span class="price-highlight">₹1000 - ₹2000</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fa-solid fa-file-circle-check"></i></div>
+                        <div class="product-info">
+                            <h4>Solved Papers</h4>
+                            <div class="product-price">Just <span class="price-highlight">₹20</span></div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-icon"><i class="fa-solid fa-pen-nib"></i></div>
+                        <div class="product-info">
+                            <h4>Hand Written</h4>
+                            <div class="product-price">Starts at <span class="price-highlight">₹150</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-side">
+            <div class="container right-panel-active" id="container">
+                <div class="form-container sign-in-container">
+                    <form id="signInForm">
+                        <h1 class="title-teal">Sign in</h1>
+                        <div class="social-container">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>or use your account</span>
+                        <div class="input-group">
+                            <i class="far fa-envelope"></i>
+                            <input type="email" placeholder="Email" aria-label="Email" required />
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Password" aria-label="Password" required />
+                        </div>
+                        <a href="#" style="font-size: 11px; color: #333; margin-top: 10px; text-decoration: none;">Forgot password?</a>
+                        <button type="submit" class="btn-form">Sign In</button>
+                    </form>
+                </div>
+
+                <div class="form-container sign-up-container">
+                    <form id="signUpForm">
+                        <h1 class="title-teal">Create Account</h1>
+                        <div class="social-container">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Google"><i class="fab fa-google"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                        <span>or use your email for registration:</span>
+                        <div class="input-group">
+                            <i class="far fa-user"></i>
+                            <input type="text" placeholder="Name" aria-label="Full Name" required />
+                        </div>
+                        <div class="input-group">
+                            <i class="far fa-envelope"></i>
+                            <input type="email" placeholder="Email" aria-label="Email" required />
+                        </div>
+                        <div class="input-group">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Password" aria-label="Password" required />
+                        </div>
+                        <button type="submit" class="btn-form">Sign Up</button>
+                    </form>
+                </div>
+
+                <div class="overlay-container">
+                    <div class="overlay">
+                        <div class="overlay-panel overlay-left">
+                            <h1>Welcome Back!</h1>
+                            <p>To keep connected with Shyam Books please login with your personal info</p>
+                            <button class="btn-form ghost" id="signIn">Sign In</button>
+                        </div>
+                        <div class="overlay-panel overlay-right">
+                            <h1>Hello, Student!</h1>
+                            <p>Enter your details to access unlimited IGNOU solutions and guides</p>
+                            <button class="btn-form ghost" id="signUp">Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses-section" class="courses-section">
+        <h2>Find Your Course Material</h2>
+        <p>Select your educational stream to view available books and assignments</p>
+        
+        <div class="select-wrapper">
+            <select class="custom-select" id="courseSelect">
+                <option value="" disabled selected>Select Your Stream...</option>
+                <option value="arts">ARTS (BA/MA)</option>
+                <option value="science">SCIENCE (B.Sc/M.Sc)</option>
+                <option value="commerce">COMMERCE (B.Com/M.Com)</option>
+                <option value="masters">MASTERS (General)</option>
+                <option value="it">INFORMATION TECHNOLOGIES (BCA/MCA)</option>
+                <option value="phd">P.hD</option>
+                <option value="bed">B.Ed</option>
+            </select>
+        </div>
+    </section>
+
+    <footer id="contact-section">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>About Us</h3>
+                <p>
+                    Shyam Books is dedicated to helping IGNOU students succeed. 
+                    We provide affordable, high-quality study materials including 
+                    solved assignments, projects, and exam notes to ensure you 
+                    get the best grades possible.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3>Suggestion</h3>
+                <p>Have a book request or need specific study material? <br>
+                Drop us a message and we will try our best to arrange it for you.</p>
+            </div>
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <a href="https://wa.me/917077254615" class="contact-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i> +91 7077254615
+                </a>
+                <a href="mailto:ghanashyam1599@gmail.com" class="contact-link">
+                    <i class="far fa-envelope"></i> ghanashyam1599@gmail.com
+                </a>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 30px; font-size: 0.8rem; opacity: 0.6;">
+            &copy; 2023 Shyam Books. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add("right-panel-active");
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove("right-panel-active");
+        });
+
+        document.getElementById('signInForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Welcome back to Shyam Books!");
+        });
+
+        document.getElementById('signUpForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Account created successfully! Welcome to Shyam Books.");
+        });
+
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if(hamburger) {
+            hamburger.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                const icon = hamburger.querySelector('i');
+                if(navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+
+        document.getElementById('courseSelect').addEventListener('change', function() {
+            alert("You selected: " + this.options[this.selectedIndex].text);
+        });
+    </script>
+</body>
+</html>
